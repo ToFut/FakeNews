@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake News</title>
+</head>
+<body>
+<form onsubmit="FakeOrNews(selectedText)">
+    <input type="button" value="click me" onclick="FakeOrNews()" >
+
+</form>
+
+<p id="demo"></p>
+<script type="text/javascript">
+
+
+    function FakeOrNews() {
+        document.getElementById("demo").innerHTML = 'hii';
+        var xhr =  new XMLHttpRequest();
+        xhr.onreadystatechange=function(){handleStateChange(xhr);}
+        xhr.open('GET', "http://www.politiwatch.co.il", true);
+        xhr.send(null);
+        document.getElementById("demo").innerHTML = xhr.responseText;
+    }
+    function handleStateChange(xhr){
+        if(xhr.readyState == 4){
+            //if(xmlHttp.status == 200){
+            alert(xhr.status);
+            alert(xhr.responseText);
+            //document.getElementById("results").innerHTML = xmlHttp.responseText;
+            //}
+        }
+    }
+
+</script>
+
+
+</body>
+</html>
+
