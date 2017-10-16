@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Fake News</title>
 </head>
+<textarea id="quote" cols="50" rows="5">
+Some text here
+</textarea>
+
+<div id="output"></div>
+
 <body>
 <form onsubmit="FakeOrNews(selectedText)">
     <input type="button" value="click me" onclick="FakeOrNews()" >
@@ -13,24 +19,26 @@
 <p id="demo"></p>
 <script type="text/javascript">
 
-
     function FakeOrNews() {
-        document.getElementById("demo").innerHTML = 'hii';
         var xhr =  new XMLHttpRequest();
-        xhr.onreadystatechange=function(){handleStateChange(xhr);}
-        xhr.open('GET', "http://www.politiwatch.co.il", true);
-        xhr.send(null);
-        document.getElementById("demo").innerHTML = xhr.responseText;
+        xhr.open('GET', "http://localhost:8080/", true);
+        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        xhr.setRequestHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+        xhr.setRequestHeader("Access-Control-Allow-Headers", "Content-Type");
+        xhr.send();
+        console.log('xhr text is : ' + xhr.responseText );
     }
-    function handleStateChange(xhr){
-        if(xhr.readyState == 4){
-            //if(xmlHttp.status == 200){
-            alert(xhr.status);
-            alert(xhr.responseText);
-            //document.getElementById("results").innerHTML = xmlHttp.responseText;
-            //}
+
+    var quotearea = document.getElementById('quote');
+    var output = document.getElementById('output');
+    quotearea.addEventListener('mouseup', function(){
+        if (this.selectionStart != this.selectionEnd){ // check the user has selected some text inside field
+            var selectedtext = this.value.substring(this.selectionStart, this.selectionEnd);
+            output.innerHTML = selectedtext;
+            alert(selectedtext);
         }
-    }
+    }, false)
+
 
 </script>
 
