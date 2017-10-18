@@ -1,26 +1,7 @@
-<html lang="he">
+<html lang="en">
 <body>
-
-
-<p id="demo"></p>
-
-<input id="selectedText" type = "text" value="enter here" >
-<button onclick="httpGet()">click me</button>
-
-
-<script>
-    function httpGet()
-    {
-        var theUrl = 'http://localhost:8080/fake?id=' + document.getElementById("selectedText").value;
-        console.log(theUrl);
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-        xmlHttp.send( null );
-        alert(theUrl);
-        return xmlHttp.responseText;
-    }
-
-</script>
-
+<h1>your selected text is :</h1>
+<h2 id="demo"></h2>
+<script src="Background.js"></script>
 </body>
 </html>
